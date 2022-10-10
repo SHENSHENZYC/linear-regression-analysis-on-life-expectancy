@@ -8,7 +8,7 @@
 
 This report analyzes what factors of a country significantly impact the
 nationwide life expectancy using techniques in multiple linear regression.
-It examines potential multicolinearity, influential points, heteroscedasticity
+It examines potential multicollinearity, influential points, heteroscedasticity
 and non-normality that will make the modeling estimation unreliable. It then
 performs feature selection using different approaches involving t test for
 single predictor, adjusted R squared, Mallow's Cp and backward stepwise BIC.
@@ -166,7 +166,7 @@ predictor columns:
 From the heatmap, the column `under_five_death` and `infant_deaths` are highly
 correlated to each other; the column `thinness_child` and `thinness_teen` are
 highly correlated to each other. This indicates that we might have significant
-multicolinearity issues with the dataset that we need to fix later.
+multicollinearity issues with the dataset that we need to fix later.
 
 Focusing on the response column `life_expectancy`, the following table shows
 top five columns with largest absolute value of correlation coefficient. This
@@ -194,7 +194,7 @@ Least Squares Estimation (OLSE), namely this:
 
 Starting from this initial model, we checked for model assumptions:
 
-- multicolinearity
+- multicollinearity
 - influential points
 - heteroscedasticity
 - normality
@@ -205,8 +205,8 @@ while removing non-informative predictors.
 
 An overview of this process is provided as follows:
 
-1. check multicolinearity and influential points using all potential predictors
-    - multicolinearity: drop correlated columns, regularization, PCA
+1. check multicollinearity and influential points using all potential predictors
+    - multicollinearity: drop correlated columns, regularization, PCA
     - influential points: parallel analysis
 
 2. fit initial model with all potential predictors
@@ -223,15 +223,15 @@ An overview of this process is provided as follows:
 5. final model
     - fit the final model and report statistics
 
-Multicolinearity and influential points are two major data structural problems
+Multicollinearity and influential points are two major data structural problems
 that most datasets have but will significantly influence model performance
 from multiple aspects. To begin with, we first identified the source of
-multicolinearity.
+multicollinearity.
 
-### Multicolinearity
+### Multicollinearity
 
 From the above heatmap of correlation matrix, we suspected that there is
-significant multicolinearity in the dataset. We followed by calculating
+significant multicollinearity in the dataset. We followed by calculating
 Variance Inflation Factor (VIF) score for each potential predictor, which
 is listed in the table below:
 
@@ -261,12 +261,12 @@ is listed in the table below:
 
 By "Rule of Thumb", both `under_five_death` and `infant_deaths` have a VIF
 score greater than 10, which indicates that these two predictors are highly
-correlated to other predictors, causing multicoliearity. Aware that records
+correlated to other predictors, causing multicollinearity. Aware that records
 in `infant_deaths` are also counted in `under_five_death`, we suspected that
 they are correlated to each other.
 
 To fix this problem, we first tried to remove `infant_deaths` to see how
-we improve in multicolinearity. The VIF score table after removing
+we improve in multicollinearity. The VIF score table after removing
 `infant_deaths` from the model looks like this:
 
 | features                   | 	vif      |
@@ -293,9 +293,9 @@ we improve in multicolinearity. The VIF score table after removing
 | school_years               | 	3.314856 |
 
 Now VIF of every predictor is less than 10, and thus, by "Rule of Thumb",
-there is no significant multicolinearity without the `infant_deaths` column.
+there is no significant multicollinearity without the `infant_deaths` column.
 Hence, we should exclude this column from the model. The current model after
-fixing multicolinearity is:
+fixing multicollinearity is:
 
 `life_expectancy` ~ `continent` + `developed` + `adult_mortality` + `under_five_death` + `alcohol` + `hiv` + `bmi` + `thinness_child` + `thinness_teen` + `hepatitis_b` + `polio` + `diphtheria` + `gdp` + `health_expenditure` + `icor` + `school_years`
 
