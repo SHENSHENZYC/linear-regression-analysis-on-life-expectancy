@@ -9,4 +9,4 @@ root-mean-square errors. This final model offers a statistical insight on what f
 the impacts are.
 
 The linear_regression.ipynb includes all codes involving data cleaning, exploratory data analysis, regression modeling, statistical tests and feature selection,
-and derives the final choice of model at the end. The report.pdf walks through the entire process with tables and visualizations.
+and derives the final choice of model at the end. The report.pdf walks through the entire process with tables and visualizations and introduces the dataset that is primarily used in this project. 
